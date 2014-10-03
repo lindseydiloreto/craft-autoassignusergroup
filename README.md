@@ -1,5 +1,5 @@
-#Auto-Assign User Group
-#plugin for Craft CMS
+Auto-Assign User Group plugin for Craft CMS
+=================================================
 
 Automatically assign newly created users to a specific user group.
 
