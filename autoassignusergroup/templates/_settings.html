@@ -1,15 +1,17 @@
 {% import '_includes/forms' as forms %}
 
-<p>These settings will <strong>only</strong> take effect when registering a new user via the Control Panel.</p>
-
-<p>If you'd like to auto-assign a user group to anyone who registers via a front-end form, that can be specified on the <strong><a href="{{ url('settings/users/settings') }}">Settings &gt; Users</a></strong> page, beneath the <strong>"Allow public registration?"</strong> checkbox.</p>
-
 <div class="field">
 	<div class="heading">
-		<h2>User Groups</h2>
+		<label>User Group(s) to be Auto-Assigned</label>
 		<div class="instructions"><p>Which user group(s) should be automatically assigned upon registration?</p></div>
 	</div>
 	<div class="input">
 		{{ userGroupsField }}
 	</div>
+</div>
+
+<div class="note">
+	<h3>Important Note:</h3>
+	<p>The user group(s) selected will be assigned to a new user when the new user is created <strong>through the Control Panel</strong>. If your website allows users to register through a front-end form, their group will be automatically assigned in a different way.</p>
+	<p>If you'd like to auto-assign a user group for anyone who registers via the front-end form, that can be specified on the <strong><a href="{{ url('settings/users/settings') }}">Settings &gt; Users</a></strong> page, below the <strong>"Allow public registration?"</strong> checkbox.</p>
 </div>
