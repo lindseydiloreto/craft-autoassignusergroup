@@ -1,6 +1,8 @@
 Auto-Assign User Group plugin for Craft CMS
 =================================================
 
+Automatically assign newly created users to a specific user group.
+
 ##The Hypothetical
 
 Imagine this scenario...
@@ -13,7 +15,7 @@ You are the super-admin of a website. On that site, you'll need a small group of
 
 Members cannot register themselves... Their accounts must be created by Admins.
 
-Admins can create new users, **but should not be able to edit the individual permissions of each member**. This is a bit of a problem, since Craft allows you to edit the _individual permissions_ of a user from the exact same page as you would _assign them to a specific user group_.
+Admins can create new users, **but should not be able to edit the individual permissions of each member**. This is a bit of a problem, since Craft allows you to _edit the individual permissions of a user_ from the exact same page as you would _assign them to a specific user group_.
 
 ##The Solution?
 
@@ -25,7 +27,7 @@ Once you've installed the plugin, visit:
 
 - **Settings > Plugins > Auto-Assign User Group**
 
-There you will see a list of available user groups, under the heading "User Group(s) to be Auto-Assigned". Simply check every group that a new user should be automatically assigned to, and hit Save. It's just that easy!
+There you will see a list of available user groups, under the heading "User Group(s) to be Auto-Assigned". Simply check every group that a new user should be automatically assigned to, and hit Save. **From that point on, every new user created through the Control Panel will automatically belong to the specified group.**
 
 If no user groups have been created yet, you'll see a message that "No user groups exist" and a link to "Create one now..."
 
