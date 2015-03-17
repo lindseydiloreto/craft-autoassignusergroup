@@ -6,22 +6,19 @@ class AutoAssignUserGroupPlugin extends BasePlugin
 
 	public function init() {
 		parent::init();
-		craft()->on('users.saveUser', function(Event $event) {
-			// Set target group
-			$targetGroups = craft()->plugins->getPlugin('autoAssignUserGroup')->getSettings()->userGroups;
-			// If new user
+		craft()->on('users.onSaveUser', function(Event $event) {
+
+			// if we are creating a new user
 			if ($event->params['isNewUser']) {
-				// If "groups" is in POST
-				if (isset($_POST['groups'])) {
-					// If not an array, it's an empty string
-					if (!is_array($_POST['groups'])) {
-						// Set it to an array with the user group ID
-						$_POST['groups'] = $targetGroups;
-					} else {
-						// Merge in the user group ID with any existing ones.
-						$_POST['groups'] = array_merge($_POST['groups'], $targetGroups);
-					}
-				}
+
+				// get the user that was just saved
+				$user = $event->params['user'];
+
+				// get our target groups from the settings
+				$targetGroups = craft()->plugins->getPlugin('autoAssignUserGroup')->getSettings()->userGroups;
+
+				// assign the user to the target group
+				craft()->userGroups->assignUserToGroups($user->id, $targetGroups);
 			}
 		});
 	}
