@@ -9,6 +9,8 @@ class AutoAssignUserGroupPlugin extends BasePlugin
 		craft()->on('users.saveUser', function(Event $event) {
 			// Set target group
 			$targetGroups = craft()->plugins->getPlugin('autoAssignUserGroup')->getSettings()->userGroups;
+			// Ensure all target groups exist
+			$this->_ensureGroupsExist($targetGroups);
 			// If new user
 			if ($event->params['isNewUser']) {
 				// If "groups" is in POST
@@ -33,7 +35,7 @@ class AutoAssignUserGroupPlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '1.0.0';
+		return '1.0.1';
 	}
 
 	public function getDeveloper()
@@ -78,6 +80,25 @@ class AutoAssignUserGroupPlugin extends BasePlugin
 		return craft()->templates->render('autoassignusergroup/_settings', array(
 			'userGroupsField' => TemplateHelper::getRaw(count($userGroups) ? $checkboxes : $noGroups),
 		));
+	}
+
+	private function _ensureGroupsExist($targetGroups)
+	{
+		// Compile IDs of existing groups
+		$existingIds = array();
+		foreach (craft()->userGroups->getAllGroups() as $group) {
+			$existingIds[] = $group->id;
+		}
+		// Loop through target group IDs
+		foreach ($targetGroups as $targetGroupId) {
+			// If target group doesn't exist
+			if (!in_array($targetGroupId, $existingIds)) {
+				// Throw error message
+				$pluginName = $this->getName();
+				$errorMessage = "The default user group no longer exists. Please update your settings for the {$pluginName} plugin.";
+				throw new Exception($errorMessage);
+			}
+		}
 	}
 	
 }
