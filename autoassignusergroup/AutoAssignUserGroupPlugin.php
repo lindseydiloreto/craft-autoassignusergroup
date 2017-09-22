@@ -23,7 +23,7 @@ class AutoAssignUserGroupPlugin extends BasePlugin
 							$_POST['groups'] = $targetGroups;
 						} else {
 							// Merge in the user group ID with any existing ones.
-							$_POST['groups'] = array_merge($_POST['groups'], $targetGroups);
+							$_POST['groups'] = array_unique(array_merge($_POST['groups'], $targetGroups));
 						}
 					}
 				}
@@ -48,7 +48,7 @@ class AutoAssignUserGroupPlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '1.1.0';
+		return '1.1.1';
 	}
 
 	public function getSchemaVersion()
